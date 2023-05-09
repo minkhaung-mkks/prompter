@@ -31,7 +31,6 @@ const handler = NextAuth({
                 })
 
                 //Create User if not exist
-                console.log(profile.name.toLowerCase())
                 if (!userExists) {
                     await User.create({
                         email: profile.email,
