@@ -6,7 +6,7 @@ import Image from 'next/image';
 import {signIn, signOut, useSession, getProviders} from 'next-auth/react'
 
 const Nav = () => {
-    let isUserLoggedIn = true;
+    const {data:session} = useSession();
     const [providers, setProviders] = useState(null);
     const [toggleDropdown, setToggleDropdown] = useState(false);
     const setupProviders = async () =>{
@@ -32,7 +32,7 @@ const Nav = () => {
 
         {/* Desktop Navigation */}
         <div className='sm:flex hidden'>
-            {isUserLoggedIn ? (
+            {session?.user ? (
                 <div className='flex gap-3 md:gap-5'>
                     <Link className='black_btn' href='/create-prompt'>
                         Create Post
@@ -57,7 +57,7 @@ const Nav = () => {
                         <button 
                             type='button' 
                             onClick={()=>signIn(provider?.id)}
-                            key={provide?.name}
+                            key={provider?.name}
                             className='black_btn'
                         >
                             Sign In
@@ -70,7 +70,7 @@ const Nav = () => {
         </div>
         {/* Mobile Navigation */}
         <div className="sm:hidden flex relative">
-            {isUserLoggedIn ? ( 
+            {session?.user ? ( 
                 <div className='flex'>
                     <Image
                         src='assets/images/logo.svg'
@@ -116,7 +116,7 @@ const Nav = () => {
                         <button 
                             type='button' 
                             onClick={()=>signIn(provider?.id)}
-                            key={provide?.name}
+                            key={provider?.name}
                             className='black_btn'
                         >
                             Sign In
