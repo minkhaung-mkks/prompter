@@ -23,7 +23,7 @@ const Form = ({
                 className='glassmorphism mt-10 w-full max-w-2x1 flex flex-col gap-7'
             >
                 <label htmlFor="">
-                    <span className='font-satoshi font-semibold text-base text-grey-700'>
+                    <span className='font-satoshi font-semibold text-base text-gray-700'>
                         Your AI prompt
                     </span>
                     <textarea
@@ -39,7 +39,7 @@ const Form = ({
                 </label>
 
                 <label htmlFor="">
-                    <span className='font-satoshi font-semibold text-base text-grey-700'>
+                    <span className='font-satoshi font-semibold text-base text-gray-700'>
                         Tag {` `}
                         <span className='font-normal'>
                             (#product, #webdev, #idea)
@@ -57,7 +57,7 @@ const Form = ({
                     </input>
                 </label>
                 <div className="flex-end mx-3 mb-5 gap-4">
-                    <Link href='/' className='text-grey-500 text-sm'>
+                    <Link href='/' className='text-gray-500 text-sm'>
                         Cancel
                     </Link>
                     <button
