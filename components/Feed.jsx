@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 
 import PromptCard from './PromptCard'
 
+
 const PromptCardList = ({ data, handleTagClick }) => {
   return (
     <div className="mt-16 prompt_layout">
@@ -17,7 +18,6 @@ const PromptCardList = ({ data, handleTagClick }) => {
     </div>
   )
 }
-
 const Feed = () => {
   const [searchTerm, setSearchTerm] = useState('')
   const [posts, setPosts] = useState([])
@@ -31,8 +31,9 @@ const Feed = () => {
 
       setPosts(data);
     }
-    console.log(posts);
+
     fetchPosts();
+    console.log(posts);
   }, [])
   return (
     <section className='feed'>
