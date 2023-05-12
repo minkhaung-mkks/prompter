@@ -18,7 +18,6 @@ const CreatePrompt = () => {
 
     const createPrompt = async (e) => {
         e.preventDefault();
-        console.log("testing")
         setSubmitting(true)
         try {
             const res = await fetch('/api/prompt/new', {
