@@ -2,23 +2,14 @@
 
 import { useState, useEffect } from 'react'
 
-import PromptCard from './PromptCard'
+import PromptCardList from './PromptCardList'
 
 
-const PromptCardList = ({ data, handleTagClick }) => {
-  return (
-    <div className="mt-16 prompt_layout">
-      {data.map((post) => (
-        <PromptCard
-          key={post.id}
-          post={post}
-          handleTagClick={handleTagClick}
-        />
-      ))}
-    </div>
-  )
+const handleTagClick = () => {
+
 }
 const Feed = () => {
+
   const [searchTerm, setSearchTerm] = useState('')
   const [posts, setPosts] = useState([])
   const handleSearchChange = (e) => {
@@ -48,7 +39,7 @@ const Feed = () => {
       </form>
       <PromptCardList
         data={posts}
-        handleTagClick={() => { }}
+        handleTagClick={handleTagClick}
       />
     </section>
   )
