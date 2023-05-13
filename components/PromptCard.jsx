@@ -50,6 +50,22 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
       >
         {post.tag}
       </p>
+      {handleDelete && handleEdit && (
+        <div className="mt-5 flex-center gap-4 border-t border-gray-100 pt-3">
+          <button
+            className="font-inter text-sm cursor-pointer edit_btn"
+            onClick={handleEdit}
+          >
+            Edit
+          </button>
+          <button
+            className="font-inter text-sm cursor-pointer delete_btn"
+            onClick={handleDelete}
+          >
+            Delete
+          </button>
+        </div>
+      )}
     </div>
   )
 }
