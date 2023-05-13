@@ -3,7 +3,12 @@ import { useSession } from 'next-auth/react'
 import PromptCard from './PromptCard';
 
 const PromptCardList = ({ data, handleTagClick }) => {
-    const { data: session } = useSession();
+    const { data: session, status } = useSession();
+
+    const loading = status === 'loading';
+
+    if (loading) return <div>Loading...</div> // or some loading spinner
+
     const handleDelete = () => {
 
     }
