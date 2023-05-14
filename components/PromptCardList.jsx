@@ -1,16 +1,18 @@
 import React from 'react'
 import { useSession } from 'next-auth/react'
 import PromptCard from './PromptCard';
+import { useRouter } from 'next/navigation';
 
 const PromptCardList = ({ data, handleTagClick }) => {
     const { data: session, status } = useSession();
+    const router = useRouter();
 
     const loading = status === 'loading';
 
     if (loading) return <div>Loading...</div> // or some loading spinner
 
     const handleDelete = () => {
-
+        
     }
     const handleEdit = () => {
 
