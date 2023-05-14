@@ -14,7 +14,11 @@ const CreatePrompt = () => {
     })
 
     const router = useRouter();
-    const { data: session } = useSession();
+    const { data: session, status } = useSession();
+
+    const loading = status === 'loading';
+
+    if (loading) return <div>Loading...</div> // or some loading spinner
 
     const createPrompt = async (e) => {
         e.preventDefault();

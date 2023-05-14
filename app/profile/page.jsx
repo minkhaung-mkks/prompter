@@ -7,7 +7,11 @@ import { useRouter } from "next/navigation";
 import Profile from "@components/Profile";
 
 const MyProfile = () => {
-    const { data: session } = useSession();
+    const { data: session, status } = useSession();
+
+    const loading = status === 'loading';
+
+    if (loading) return <div>Loading...</div> // or some loading spinner
     const [posts, setPosts] = useState([])
     useEffect(() => {
         const fetchPosts = async () => {

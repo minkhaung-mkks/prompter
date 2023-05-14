@@ -1,12 +1,12 @@
 "use client"
 
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import { useSession } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
+import { useRouter,useSearchParams } from 'next/navigation'
 
 import Form from '@components/Form'
 
-const CreatePrompt = () => {
+const UpdatePrompt = () => {
     const [submitting, setSubmitting] = useState(false)
     const [post, setPost] = useState({
         prompt: '',
@@ -14,14 +14,32 @@ const CreatePrompt = () => {
     })
 
     const router = useRouter();
-    const { data: session } = useSession();
+    const searchParams = useSearchParams();
+    const { data: session, status } = useSession();
+    const loading = status === 'loading';
 
-    const createPrompt = async (e) => {
+    if (loading) return <div>Loading...</div> // or some loading spinner
+    const promptId=searchParams.get('id');
+    const getPromptDetails = async()=>{
+        const res = await fetch(`/api/prompt/${promptId}`)
+        const data = await res.json();
+        setPost({
+            prompt: data.prompt,
+            tag: data.tag
+        })
+    }
+    useEffect(() => {
+        if(promptId) getPromptDetails();
+    }, [promptId])
+    
+
+    const updatePrompt = async (e) => {
         e.preventDefault();
+        if(!promptId) return alert('Prompt ID not found')
         setSubmitting(true)
         try {
             const res = await fetch('/api/prompt/new', {
-                method: 'POST',
+                method: 'PATCH',
                 body: JSON.stringify({
                     prompt: post.prompt,
                     userId: session?.user.id,
@@ -41,15 +59,15 @@ const CreatePrompt = () => {
 
     return (
         <Form
-            type="Create"
+            type="Edit"
             post={post}
             setPost={setPost}
             submitting={submitting}
-            handleSubmit={createPrompt}
+            handleSubmit={updatePrompt}
         >
 
         </Form>
     )
 }
 
-export default CreatePrompt
+export default UpdatePrompt
