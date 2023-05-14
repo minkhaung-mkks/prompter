@@ -17,6 +17,7 @@ const PromptCard = ({ post, handleTagClick, isCreator }) => {
 
   }
   const handleEdit = (id) => {
+    console.log(id)
       router.push(`/update-prompt?id=${id}`)
   }
   return (
@@ -60,13 +61,13 @@ const PromptCard = ({ post, handleTagClick, isCreator }) => {
         <div className="mt-5 flex-center gap-4 border-t border-gray-100 pt-3">
           <button
             className="font-inter text-sm cursor-pointer edit_btn py-1"
-            onClick={()=>handleEdit(post?.id)}
+            onClick={()=>handleEdit(post?._id)}
           >
             Edit
           </button>
           <button
             className="font-inter text-sm cursor-pointer delete_btn py-1"
-            onClick={()=>handleDelete(post?.id)}
+            onClick={()=>handleDelete(post?._id)}
           >
             Delete
           </button>

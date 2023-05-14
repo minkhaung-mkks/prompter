@@ -38,11 +38,10 @@ const UpdatePrompt = () => {
         if(!promptId) return alert('Prompt ID not found')
         setSubmitting(true)
         try {
-            const res = await fetch('/api/prompt/new', {
+            const res = await fetch(`/api/prompt/${promptId}`, {
                 method: 'PATCH',
                 body: JSON.stringify({
                     prompt: post.prompt,
-                    userId: session?.user.id,
                     tag: post.tag
                 })
             })
