@@ -65,6 +65,36 @@
   opacity: 0.15;
 }
 
+.edit_btn, .delete_btn{
+    width: 80px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.edit_btn{
+    color: white;
+    background: rgb(20,254,2);
+    background: -moz-radial-gradient(circle, rgba(20,254,2,1) 0%, rgba(8,254,15,1) 37%, rgba(0,255,136,1) 100%);
+    background: -webkit-radial-gradient(circle, rgba(20,254,2,1) 0%, rgba(8,254,15,1) 37%, rgba(0,255,136,1) 100%);
+    background: radial-gradient(circle, rgba(20,254,2,1) 0%, rgba(8,254,15,1) 37%, rgba(0,255,136,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#14fe02",endColorstr="#00ff88",GradientType=1);
+}
+
+.delete_btn{
+    color: white;
+    background: rgb(254,82,2);
+background: -moz-radial-gradient(circle, rgba(254,82,2,1) 0%, rgba(254,44,8,1) 37%, rgba(255,29,0,1) 100%);
+background: -webkit-radial-gradient(circle, rgba(254,82,2,1) 0%, rgba(254,44,8,1) 37%, rgba(255,29,0,1) 100%);
+background: radial-gradient(circle, rgba(254,82,2,1) 0%, rgba(254,44,8,1) 37%, rgba(255,29,0,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#fe5202",endColorstr="#ff1d00",GradientType=1);
+}
+
+.edit_btn:hover,.delete_btn:hover, .edit_btn:focus, .delete_btn:focus{
+    cursor: pointer;
+    filter: brightness(0.8);
+    border-radius: 10px;
+}
+
 @media screen and (max-width: 640px) {
   .main {
     padding: 0;

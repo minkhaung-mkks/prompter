@@ -1,15 +1,23 @@
 "use client"
 import { useState } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
-const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
+const PromptCard = ({ post, handleTagClick, isCreator }) => {
   const [copied, setCopied] = useState("")
+  const router = useRouter();
   const handleCopy = () => {
     setCopied(post.prompt)
     navigator.clipboard.writeText(post.prompt);
     setTimeout(() => {
       setCopied("")
     }, 3000);
+  }
+  const handleDelete = (id) => {
+
+  }
+  const handleEdit = (id) => {
+      router.push(`/update-prompt?id=${id}`)
   }
   return (
     <div className="prompt_card">
@@ -48,17 +56,17 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
       >
         {post.tag}
       </p>
-      {handleDelete && handleEdit && (
+      {isCreator && (
         <div className="mt-5 flex-center gap-4 border-t border-gray-100 pt-3">
           <button
-            className="font-inter text-sm cursor-pointer edit_btn"
-            onClick={handleEdit}
+            className="font-inter text-sm cursor-pointer edit_btn py-1"
+            onClick={()=>handleEdit(post?.id)}
           >
             Edit
           </button>
           <button
-            className="font-inter text-sm cursor-pointer delete_btn"
-            onClick={handleDelete}
+            className="font-inter text-sm cursor-pointer delete_btn py-1"
+            onClick={()=>handleDelete(post?.id)}
           >
             Delete
           </button>
