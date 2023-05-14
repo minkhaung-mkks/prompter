@@ -3,7 +3,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
-const PromptCard = ({ post, handleTagClick, isCreator }) => {
+const PromptCard = ({ post, handleTagClick, isCreator,handleDelete,handleEdit }) => {
   const [copied, setCopied] = useState("")
   const router = useRouter();
   const handleCopy = () => {
@@ -13,13 +13,7 @@ const PromptCard = ({ post, handleTagClick, isCreator }) => {
       setCopied("")
     }, 3000);
   }
-  const handleDelete = (id) => {
-
-  }
-  const handleEdit = (id) => {
-    console.log(id)
-      router.push(`/update-prompt?id=${id}`)
-  }
+ 
   return (
     <div className="prompt_card">
       <div className="flex justify-between items-start gap-5">
