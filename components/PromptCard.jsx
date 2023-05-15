@@ -2,6 +2,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import Link from 'next/link';
 
 const PromptCard = ({ post, handleTagClick, isCreator,handleDelete,handleEdit }) => {
   const [copied, setCopied] = useState("")
@@ -13,11 +14,21 @@ const PromptCard = ({ post, handleTagClick, isCreator,handleDelete,handleEdit })
       setCopied("")
     }, 3000);
   }
+
+  const handleProfileClick =(id)=>{
+    router.push(`/profile/${id}`)
+  }
+
+  const handleOwnProfileClick=()=>{
+    router.push('/profile')
+  }
+
+  const profileRoute = `/profile/${post?.creator._id}`
  
   return (
     <div className="prompt_card">
       <div className="flex justify-between items-start gap-5">
-        <div className="flex-1 flex justify-start items-center gap-3 cursor-pointer">
+        <Link href={isCreator ? '/profile' : profileRoute} className="flex-1 flex justify-start items-center gap-3 cursor-pointer">
           <Image
             src={post?.creator?.image}
             alt="user profile picture"
@@ -33,7 +44,7 @@ const PromptCard = ({ post, handleTagClick, isCreator,handleDelete,handleEdit })
               {post?.creator?.email}
             </p>
           </div>
-        </div>
+        </Link>
         <div className="copy_btn" onClick={handleCopy}>
           <Image
             src={copied === post.prompt ? '/assets/icons/tick.svg' : "/assets/icons/copy.svg"}

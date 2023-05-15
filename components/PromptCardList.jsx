@@ -8,6 +8,9 @@ const PromptCardList = ({ data, handleTagClick }) => {
     const [posts, setPosts] = useState(data)
     const loading = status === 'loading';
 
+    useEffect(()=>{
+      setPosts(data)
+    },[data])
     if (loading) return <div>Loading...</div> // or some loading spinner
 
     const handleDelete = async (id) => {
@@ -23,15 +26,13 @@ const PromptCardList = ({ data, handleTagClick }) => {
                 setPosts(filteredPosts)
             } catch (error) {
                 console.log(error)
-            }
+            } 
         }
       }
       const handleEdit = (id) => {
           router.push(`/update-prompt?id=${id}`)
       }
-      useEffect(()=>{
-        setPosts(data)
-      },[data])
+      
     return (
         <div className="mt-16 prompt_layout">
             {posts.map((post) => (
@@ -39,7 +40,7 @@ const PromptCardList = ({ data, handleTagClick }) => {
                     key={post._id}
                     post={post}
                     handleTagClick={handleTagClick ? handleTagClick : undefined}
-                    isCreator={post.creator._id === session.user.id}
+                    isCreator={post.creator._id === session?.user.id}
                     handleDelete={handleDelete}
                     handleEdit={handleEdit}
                 />
