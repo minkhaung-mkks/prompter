@@ -4,27 +4,53 @@ import { useState, useEffect } from 'react'
 
 import PromptCardList from './PromptCardList'
 
-
-const handleTagClick = () => {
-
-}
 const Feed = () => {
 
   const [searchTerm, setSearchTerm] = useState('')
+  const [searchTimeout, setSearchTimeout] = useState(null)
+  const [searchResults, setSearchResults] = useState([])
   const [posts, setPosts] = useState([])
+  const [allPosts, setAllPosts] = useState([])
+  
+  const searchPrompts =(searchText)=>{
+    const regex = new RegExp(searchText,'i');// i makes it case insensitive.
+    return allPosts.filter((post)=>(
+        regex.test(post.creator.username) ||
+        regex.test(post.tag) ||
+        regex.test(post.prompt)
+    ))
+  }
+
   const handleSearchChange = (e) => {
-    e.preventDefault();
+    clearTimeout(searchTimeout);
+    setSearchTerm(e.target.value);
+
+    setSearchTimeout(
+        setTimeout(() => {
+            const searchedPrompts = searchPrompts(e.target.value);
+            setSearchResults(searchedPrompts);
+        }, 500)
+    );
+  }
+  const handleTagClick = (tagName) => {
+    setSearchTerm(tagName);
+    const searchedTag = allPosts.filter((post)=>(tagName === post.tag))
+    setSearchResults(searchedTag)
   }
   useEffect(() => {
     const fetchPosts = async () => {
       const res = await fetch('/api/prompt');
       const data = await res.json();
-
-      setPosts(data);
+      setAllPosts(data)
+      setSearchResults(data);
     }
 
     fetchPosts();
   }, [])
+
+  useEffect(()=>{
+    setPosts(searchResults)
+  },[searchResults])
   return (
     <section className='feed'>
       <form className='relative w-full flex-center'>
